@@ -1,0 +1,8 @@
+<div>
+    <label>Min Price: </label>
+    <input #minPrice type="number" />
+    <label>Max Price: </label>
+    <input #maxPrice type="number" />
+    <button (click)="filterByPriceBetween(minPrice.value, maxPrice.value)">Filter Between</button>
+  </div>
+  

@@ -1,0 +1,33 @@
+<div>
+  <h1>Product List</h1>
+
+  <!-- Filter by Price Between -->
+  <div>
+    <label>Min Price: </label>
+    <input #minPrice type="number" />
+    <label>Max Price: </label>
+    <input #maxPrice type="number" />
+    <button (click)="filterByPriceBetween(minPrice.value, maxPrice.value)">Filter Between</button>
+  </div>
+
+  <!-- Filter by Price Greater Than or Equal -->
+  <div>
+    <label>Price Greater Than or Equal: </label>
+    <input #greaterPrice type="number" />
+    <button (click)="filterByPriceGreaterThanEqual(greaterPrice.value)">Filter Greater Than Equal</button>
+  </div>
+
+  <!-- Filter by Price Less Than or Equal -->
+  <div>
+    <label>Price Less Than or Equal: </label>
+    <input #lessPrice type="number" />
+    <button (click)="filterByPriceLessThanEqual(lessPrice.value)">Filter Less Than Equal</button>
+  </div>
+
+  <!-- Product List Display -->
+  <ul>
+    <li *ngFor="let product of products">
+      {{ product.title }} - {{ product.price | currency }}
+    </li>
+  </ul>
+</div>
