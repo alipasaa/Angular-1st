@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <mat-card>
+      <h3>Filter Products</h3>
+      <mat-form-field appearance="fill" class="mb-3">
+        <mat-label>Min Price</mat-label>
+        <input matInput #minPrice type="number">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mb-3">
+        <mat-label>Max Price</mat-label>
+        <input matInput #maxPrice type="number">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="onFilterBetween(minPrice.value, maxPrice.value)">Filter Between</button>
+    </mat-card>
+  
+    <mat-card class="mt-3">
+      <mat-form-field appearance="fill" class="mb-3">
+        <mat-label>Price Greater Than or Equal</mat-label>
+        <input matInput #greaterPrice type="number">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="onFilterGreaterThanEqual(greaterPrice.value)">Filter Greater Than Equal</button>
+    </mat-card>
+  
+    <mat-card class="mt-3">
+      <mat-form-field appearance="fill" class="mb-3">
+        <mat-label>Price Less Than or Equal</mat-label>
+        <input matInput #lessPrice type="number">
+      </mat-form-field>
+      <button mat-raised-button color="warn" (click)="onFilterLessThanEqual(lessPrice.value)">Filter Less Than Equal</button>
+    </mat-card>
+  </div>
+  

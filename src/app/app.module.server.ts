@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   imports: [
     AppModule,
     ServerModule,
-    BrowserAnimationsModule, // Required for Angular Material components
+    BrowserAnimationsModule, 
     MatSlideToggleModule
   ],
   bootstrap: [AppComponent],

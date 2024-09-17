@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
-import { FormsModule} from '@angular/forms';
-import { MatInputModule} from '@angular/material/input';
-import { MatSelectModule} from '@angular/material/select';
-import { MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-product-list',
@@ -12,25 +8,85 @@ import { MatFormFieldModule} from '@angular/material/form-field';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
+  
+  // Product array to store retrieved products
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  // Filters for the chips
+  filters: string[] = ['Greater Than', 'Less Than']; // Predefined filters
 
-  filterByPriceGreaterThanEqual(price: string): void {
-    this.productService.getProductsByPriceGreaterThanEqual(parseFloat(price)).subscribe(data => {
-      this.products = data;
-    });
+  selectable = true;
+  removable = true;
+
+  // Remove filter chip
+  removeFilter(filter: string): void {
+    const index = this.filters.indexOf(filter);
+    if (index >= 0) {
+      this.filters.splice(index, 1);
+    }
   }
 
-  filterByPriceLessThanEqual(price: string): void {
-    this.productService.getProductsByPriceLessThanEqual(parseFloat(price)).subscribe(data => {
-      this.products = data;
-    });
+  // State for filter type and input values
+  selectedFilter: string = 'none';
+  greaterPrice: number | null = null;
+  lessPrice: number | null = null;
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+
+  // Inject the ProductService
+  constructor(private productService: ProductService) {}
+
+  // Handle filter selection change
+  onFilterTypeChange(): void {
+    // Reset values when the filter type changes
+    this.greaterPrice = null;
+    this.lessPrice = null;
+    this.minPrice = null;
+    this.maxPrice = null;
   }
 
-  filterByPriceBetween(minPrice: string, maxPrice: string): void {
-    this.productService.getProductsByPriceBetween(parseFloat(minPrice), parseFloat(maxPrice)).subscribe(data => {
-      this.products = data;
-    });
+  // Filter by Greater Than or Equal
+  filterByPriceGreaterThanEqual(): void {
+    if (this.greaterPrice !== null) {
+      this.productService.getProductsByPriceGreaterThanEqual(this.greaterPrice)
+        .subscribe(
+          (data: Product[]) => {
+            this.products = data;
+          },
+          (error) => {
+            console.error('Error fetching products', error);
+          }
+        );
+    }
+  }
+
+  // Filter by Less Than or Equal
+  filterByPriceLessThanEqual(): void {
+    if (this.lessPrice !== null) {
+      this.productService.getProductsByPriceLessThanEqual(this.lessPrice)
+        .subscribe(
+          (data: Product[]) => {
+            this.products = data;
+          },
+          (error) => {
+            console.error('Error fetching products', error);
+          }
+        );
+    }
+  }
+
+  // Filter by Between
+  filterByPriceBetween(): void {
+    if (this.minPrice !== null && this.maxPrice !== null) {
+      this.productService.getProductsByPriceBetween(this.minPrice, this.maxPrice)
+        .subscribe(
+          (data: Product[]) => {
+            this.products = data;
+          },
+          (error) => {
+            console.error('Error fetching products', error);
+          }
+        );
+    }
   }
 }
