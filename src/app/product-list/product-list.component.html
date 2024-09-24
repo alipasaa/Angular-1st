@@ -1,62 +1,72 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Product List</h1>
+  <!-- Product List Title -->
+  <h1 class="mb-4">Product List</h1>
 
-  <!-- Filter Section -->
-  <div class="card p-3">
-    <mat-form-field class="w-100 mb-3">
-      <mat-label>Choose Filter Type</mat-label>
-      <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterTypeChange()">
-        <mat-option value="none">Select Filter</mat-option>
-        <mat-option value="greater">Greater Than</mat-option>
-        <mat-option value="less">Less Than</mat-option>
-        <mat-option value="between">Between</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Price Greater Than or Equal -->
-    <div *ngIf="selectedFilter === 'greater'" class="mt-3">
-      <mat-form-field class="w-100">
-        <mat-label>Price Greater Than or Equal</mat-label>
-        <input matInput type="number" [(ngModel)]="greaterPrice">
+  <!-- Filter and Price Inputs -->
+  <div class="row align-items-center">
+    <div class="col-md-4 p-0">
+      <mat-form-field class="w-100 mb-0" style="margin-right: 0;">
+        <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterTypeChange()">
+          <mat-option value="none">Select Filter</mat-option>
+          <mat-option value="greater">Greater Than</mat-option>
+          <mat-option value="less">Less Than</mat-option>
+          <mat-option value="between">Between</mat-option>
+        </mat-select>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="w-100" (click)="filterByPriceGreaterThanEqual()">Apply Greater Than Filter</button>
     </div>
 
-    <!-- Price Less Than or Equal -->
-    <div *ngIf="selectedFilter === 'less'" class="mt-3">
-      <mat-form-field class="w-100">
-        <mat-label>Price Less Than or Equal</mat-label>
-        <input matInput type="number" [(ngModel)]="lessPrice">
-      </mat-form-field>
-      <button mat-raised-button color="accent" class="w-100" (click)="filterByPriceLessThanEqual()">Apply Less Than Filter</button>
-    </div>
-
-    <!-- Price Between -->
-    <div *ngIf="selectedFilter === 'between'" class="mt-3">
-      <mat-form-field class="w-50 me-2">
-        <mat-label>Min Price</mat-label>
-        <input matInput type="number" [(ngModel)]="minPrice">
-      </mat-form-field>
-      <mat-form-field class="w-50">
-        <mat-label>Max Price</mat-label>
-        <input matInput type="number" [(ngModel)]="maxPrice">
-      </mat-form-field>
-      <button mat-raised-button color="warn" class="w-100 mt-3" (click)="filterByPriceBetween()">Apply Between Filter</button>
+    <div class="col-md-8 p-0">
+      <ng-container [ngSwitch]="selectedFilter">
+        <div *ngSwitchCase="'greater'" class="d-flex align-items-center">
+          <mat-form-field class="flex-grow-1 mb-0">
+            <input matInput type="number" placeholder="Enter price" [(ngModel)]="greaterPrice" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="filterByPriceGreaterThanEqual()">Filter</button>
+        </div>
+        <div *ngSwitchCase="'less'" class="d-flex align-items-center">
+          <mat-form-field class="flex-grow-1 mb-0">
+            <input matInput type="number" placeholder="Enter price" [(ngModel)]="lessPrice" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="filterByPriceLessThanEqual()">Filter</button>
+        </div>
+        <div *ngSwitchCase="'between'" class="d-flex align-items-center">
+          <mat-form-field class="flex-grow-1 mb-0">
+            <input matInput type="number" placeholder="Min price" [(ngModel)]="minPrice" />
+          </mat-form-field>
+          <mat-form-field class="flex-grow-1 mb-0">
+            <input matInput type="number" placeholder="Max price" [(ngModel)]="maxPrice" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="filterByPriceBetween()">Filter</button>
+        </div>
+      </ng-container>
     </div>
   </div>
 
-  <!-- Product List Section -->
-  <div class="card mt-4">
-    <div class="card-header">
-      <h4>Products</h4>
+  <!-- Sort Options for Prices and Alphabetically (Only visible when a filter is selected) -->
+  <div *ngIf="selectedFilter !== 'none'" class="row align-items-center mt-3">
+    <div class="col-md-4 p-0">
+      <mat-form-field class="w-100 mb-0">
+        <mat-select placeholder="Sort By" [(value)]="selectedSortOrder" (selectionChange)="sortProducts()">
+          <mat-option value="none">Sort by</mat-option>
+          <mat-option value="price-ascending">Price: Low to High</mat-option>
+          <mat-option value="price-descending">Price: High to Low</mat-option>
+          <mat-option value="alpha-ascending">Name: A to Z</mat-option>
+          <mat-option value="alpha-descending">Name: Z to A</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let product of products">
-        <div class="d-flex justify-content-between align-items-center">
-          <span>{{ product.title }}</span>
-          <span>{{ product.price | currency }}</span>
+  </div>
+
+  <!-- Display the filtered product list as a vertical list -->
+  <div class="mt-4">
+    <div *ngFor="let product of products" class="mb-3">
+      <div class="card">
+        <div class="card-body" style="padding: 10px;">
+          <!-- Adjusted styles for the product title and price -->
+          <h5 class="product-title">{{ product.title }}</h5>
+          <p class="product-price">Price: {{ product.retailShopPrice }}€</p>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -23,3 +23,14 @@ mat-chip-list {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* Increase the font size and make the product name bold */
+.product-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Keep the price same size but bold */
+.product-price {
+  font-weight: bold;
+}

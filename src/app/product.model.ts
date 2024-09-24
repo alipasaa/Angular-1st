@@ -6,5 +6,5 @@ export interface Product {
   description: string;
   createdAt: Date;
   updatedAt: Date;
-  price: number;
+  retailShopPrice: number;
 }
