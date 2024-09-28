@@ -14,6 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -21,10 +23,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent },  // Define routes here
-  // Add more routes if needed
+  { path: '', component: ProductListComponent },
 ];
 
 @NgModule({
@@ -47,8 +50,11 @@ const routes: Routes = [
     MatCardModule,
     MatListModule,
     MatIconModule,
+    MatPaginatorModule,
     RouterModule.forRoot(routes),
     MatChipsModule,
+    MatTableModule,
+    MatExpansionModule,
     MatIconModule
   ],
   providers: [ ],

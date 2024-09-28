@@ -4,7 +4,7 @@
 
   <!-- Filter and Price Inputs -->
   <div class="row align-items-center">
-    <div class="col-md-4 p-0">
+    <div class="col-md-3 p-0">
       <mat-form-field class="w-100 mb-0" style="margin-right: 0;">
         <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterTypeChange()">
           <mat-option value="none">Select Filter</mat-option>
@@ -15,7 +15,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-md-8 p-0">
+    <div class="col-md-5 p-0">
       <ng-container [ngSwitch]="selectedFilter">
         <div *ngSwitchCase="'greater'" class="d-flex align-items-center">
           <mat-form-field class="flex-grow-1 mb-0">
@@ -40,12 +40,10 @@
         </div>
       </ng-container>
     </div>
-  </div>
 
-  <!-- Sort Options for Prices and Alphabetically (Only visible when a filter is selected) -->
-  <div *ngIf="selectedFilter !== 'none'" class="row align-items-center mt-3">
-    <div class="col-md-4 p-0">
-      <mat-form-field class="w-100 mb-0">
+    <!-- Sort Options for Prices and Alphabetically, shown only after a filter is selected -->
+    <div class="col-md-3 p-0" *ngIf="selectedFilter !== 'none'">
+      <mat-form-field class="sort-by-field" style="font-size: 0.85rem; padding: 0.5rem; color: #6c757d; font-style: italic;">
         <mat-select placeholder="Sort By" [(value)]="selectedSortOrder" (selectionChange)="sortProducts()">
           <mat-option value="none">Sort by</mat-option>
           <mat-option value="price-ascending">Price: Low to High</mat-option>
@@ -57,16 +55,34 @@
     </div>
   </div>
 
-  <!-- Display the filtered product list as a vertical list -->
-  <div class="mt-4">
-    <div *ngFor="let product of products" class="mb-3">
-      <div class="card">
-        <div class="card-body" style="padding: 10px;">
-          <!-- Adjusted styles for the product title and price -->
-          <h5 class="product-title">{{ product.title }}</h5>
-          <p class="product-price">Price: {{ product.retailShopPrice }}€</p>
-        </div>
+  <!-- Accordion for Product List -->
+  <h1 class="mt-4">Product List</h1>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let product of pagedProducts">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ product.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ product.retailShopPrice }}€
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- Expanded content with product details -->
+      <div class="product-details">
+        <p><strong>Product Name:</strong> {{ product.title }}</p>
+        <p><strong>Price:</strong> {{ product.retailShopPrice }}€</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
       </div>
-    </div>
-  </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Paginator -->
+  <mat-paginator [length]="products.length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
 </div>

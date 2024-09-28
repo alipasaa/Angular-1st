@@ -34,3 +34,48 @@ mat-chip-list {
 .product-price {
   font-weight: bold;
 }
+
+.product-details {
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+/* Apply red color to the sort options in the Sort By dropdown */
+mat-option.sort-option {
+  color: rgb(88, 75, 75);
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 8px;
+  text-align: left;
+}
+
+.mat-header-row {
+  background-color: #f1f1f1;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 3px 6px #00000029;
+}
+
+mat-accordion {
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-expansion-panel {
+  margin-bottom: 15px;
+}
+
+mat-panel-title {
+  font-weight: bold;
+}
+
+mat-panel-description {
+  font-style: italic;
+  color: #6c757d;
+}
