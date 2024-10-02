@@ -65,42 +65,37 @@
     </div>
   </mat-card>
 
+  <!-- Always Visible Product List Section -->
+  <mat-card class="mt-4">
+    <h2 class="product-list-title">Product List</h2> <!-- Product list title always visible -->
 
+    <div *ngIf="products.length > 0; else noResults">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let product of pagedProducts">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ product.title }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ product.retailShopPrice }}€
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
+          <!-- Expanded content with product details -->
+          <div class="product-details">
+            <p><strong>Product Name:</strong> {{ product.title }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Price:</strong> {{ product.retailShopPrice }}€</p>
+            <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
 
-  <!-- Spinner -->
-  <div *ngIf="isLoading" class="spinner-container">
-    <mat-spinner></mat-spinner>
-  </div>
-
-  <!-- No products message -->
-  <div *ngIf="products.length === 0 && !isLoading" class="mt-4">
-    <h3>0 products</h3>
-  </div>
-
-  <!-- mat-card for product list -->
-  <mat-card *ngIf="products.length > 0">
-    <h2>Product List</h2>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let product of pagedProducts">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ product.title }}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{ product.retailShopPrice }}€
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <!-- Expanded content with product details -->
-        <div class="product-details">
-          <p><strong>Product Name:</strong> {{ product.title }}</p>
-          <p><strong>Description:</strong> {{ product.description }}</p>
-          <p><strong>Price:</strong> {{ product.retailShopPrice }}€</p>
-          <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <!-- Placeholder when there are no products -->
+    <ng-template #noResults>
+      <p>No products available. Please apply a filter.</p>
+    </ng-template>
   </mat-card>
 
   <!-- Paginator -->

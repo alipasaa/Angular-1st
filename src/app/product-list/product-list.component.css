@@ -1,7 +1,7 @@
 .custom-title {
-  color: rgb(51, 120, 185);  /* Change the title color to blue */
+  color: rgb(51, 120, 185);  
   font-size: 22px;         /* Increase the font size */
-  font-weight: bold;       /* Make it bold */
+  font-weight: bold;       
   margin-bottom: 20px;     /* Add spacing below the title */
 }
 
@@ -32,13 +32,11 @@ mat-chip-list {
   flex-wrap: wrap;
 }
 
-/* Increase the font size and make the product name bold */
 .product-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Keep the price same size but bold */
 .product-price {
   font-weight: bold;
 }
@@ -48,7 +46,7 @@ mat-chip-list {
   background-color: #f5f5f5;
 }
 
-/* Apply red color to the sort options in the Sort By dropdown */
+/* Apply color to the sort options in the Sort By dropdown */
 mat-option.sort-option {
   color: rgb(88, 75, 75);
 }
@@ -99,5 +97,20 @@ mat-panel-description {
   width: 100%;
   height: 100%;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.7); /* Optional: adds a slight overlay effect */
+  background-color: rgba(255, 255, 255, 0.7); /* adds a slight overlay effect */
+}
+
+
+.product-list-title {
+  font-size: 20px;
+  font-weight: bold;       
+  color: rgb(51, 120, 185);  
+  margin-bottom: 20px; /* Space below the title */
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Add space between product items */
 }

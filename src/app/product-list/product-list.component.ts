@@ -113,15 +113,15 @@ export class ProductListComponent implements OnInit {
   }
 
   filterByPriceGreaterThanEqual(): void {
-    this.fetchProductsByGreaterThanEqual(); // Trigger fetch on filter action
+    this.fetchProductsByGreaterThanEqual(); 
   }
 
   filterByPriceLessThanEqual(): void {
-    this.fetchProductsByLessThanEqual(); // Trigger fetch on filter action
+    this.fetchProductsByLessThanEqual(); 
   }
 
   filterByPriceBetween(): void {
-    this.fetchProductsByPriceBetween(); // Trigger fetch on filter action
+    this.fetchProductsByPriceBetween(); 
   }
 
   sortProducts(): void {
