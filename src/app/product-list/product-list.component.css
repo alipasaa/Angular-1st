@@ -1,3 +1,11 @@
+.custom-title {
+  color: rgb(51, 120, 185);  /* Change the title color to blue */
+  font-size: 22px;         /* Increase the font size */
+  font-weight: bold;       /* Make it bold */
+  margin-bottom: 20px;     /* Add spacing below the title */
+}
+
+
 .card {
   transition: box-shadow 0.2s ease-in-out;
 }
@@ -78,4 +86,18 @@ mat-panel-title {
 mat-panel-description {
   font-style: italic;
   color: #6c757d;
+}
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.7); /* Optional: adds a slight overlay effect */
 }

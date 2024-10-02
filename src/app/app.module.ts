@@ -24,6 +24,7 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { ProductItemComponent } from './product-item/product-item.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const routes: Routes = [
@@ -55,7 +56,8 @@ const routes: Routes = [
     MatChipsModule,
     MatTableModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
   ],
   providers: [ ],
   bootstrap: [AppComponent]
