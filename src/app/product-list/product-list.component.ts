@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -23,7 +24,7 @@ export class ProductListComponent implements OnInit {
   maxPrice: number | null = null;
   selectedSortOrder: string = 'none';
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     // Initialize the component
@@ -153,5 +154,13 @@ export class ProductListComponent implements OnInit {
     this.lessPrice = null;
     this.minPrice = null;
     this.maxPrice = null;
+  }
+
+  goToChatHistory(): void {
+    this.router.navigate(['/chat-history']);
+  }
+
+  startNewChat(): void {
+    this.router.navigate(['/chat/new']);
   }
 }

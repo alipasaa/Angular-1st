@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <mat-card class="chat-container">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>chat</mat-icon>
+        <span *ngIf="isNewConversation">{{ conversationTitle }}</span>
+        <span *ngIf="!isNewConversation">{{ conversation?.title }}</span>
+      </mat-card-title>
+      <div class="header-actions">
+        <button mat-icon-button (click)="goToHistory()" matTooltip="Ιστορικό Συνομιλιών">
+          <mat-icon>history</mat-icon>
+        </button>
+        <button mat-icon-button (click)="goToProducts()" matTooltip="Προϊόντα">
+          <mat-icon>list</mat-icon>
+        </button>
+        <button mat-icon-button 
+                *ngIf="!isNewConversation" 
+                (click)="deleteConversation()" 
+                matTooltip="Διαγραφή Συνομιλίας"
+                color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- New Conversation Title Input -->
+      <div *ngIf="isNewConversation" class="new-conversation-setup mb-3">
+        <mat-form-field class="w-100">
+          <mat-label>Τίτλος Συνομιλίας</mat-label>
+          <input matInput [(ngModel)]="conversationTitle" placeholder="Εισαγάγετε έναν τίτλο για τη συνομιλία">
+        </mat-form-field>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages-container" *ngIf="conversation || isNewConversation">
+        <div *ngFor="let message of conversation?.messages" 
+             class="message" 
+             [ngClass]="{'user-message': message.sender === 'user', 'assistant-message': message.sender === 'assistant'}">
+          <div class="message-content">
+            <div class="message-text">{{ message.text }}</div>
+            <div class="message-time">{{ message.timestamp | date:'dd/MM/yyyy HH:mm' }}</div>
+          </div>
+        </div>
+
+        <!-- Empty state for new conversation -->
+        <div *ngIf="isNewConversation || conversation?.messages.length === 0" class="empty-chat">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <p>Ξεκινήστε τη συνομιλία σας εδώ...</p>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="message-input-container">
+        <mat-form-field class="message-input">
+          <mat-label>Γράψτε το μήνυμά σας...</mat-label>
+          <textarea matInput 
+                   [(ngModel)]="newMessage" 
+                   (keydown)="onKeyDown($event)"
+                   rows="2"
+                   placeholder="Πληκτρολογήστε εδώ... (Enter για αποστολή, Shift+Enter για νέα γραμμή)"></textarea>
+        </mat-form-field>
+        <button mat-fab 
+                color="primary" 
+                (click)="sendMessage()" 
+                [disabled]="!newMessage.trim()"
+                class="send-button">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

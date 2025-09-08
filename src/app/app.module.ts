@@ -17,7 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
@@ -25,21 +25,23 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ChatInterfaceComponent } from './chat/chat-interface/chat-interface.component';
+import { ChatHistoryComponent } from './chat/chat-history/chat-history.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-
-const routes: Routes = [
-  { path: '', component: ProductListComponent },
-];
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     ProductFilterComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ChatInterfaceComponent,
+    ChatHistoryComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -52,14 +54,15 @@ const routes: Routes = [
     MatListModule,
     MatIconModule,
     MatPaginatorModule,
-    RouterModule.forRoot(routes),
     MatChipsModule,
     MatTableModule,
     MatExpansionModule,
-    MatIconModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
-  providers: [ ],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Ιστορικό Συνομιλιών</mat-card-title>
+      <mat-card-subtitle>Βρείτε τις προηγούμενες συνομιλίες σας</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Search Bar -->
+      <div class="search-container mb-3">
+        <mat-form-field class="w-100">
+          <mat-label>Αναζήτηση συνομιλιών...</mat-label>
+          <input matInput [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" placeholder="Πληκτρολογήστε για αναζήτηση...">
+          <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons mb-3">
+        <button mat-raised-button color="primary" (click)="startNewChat()" class="me-2">
+          <mat-icon>add</mat-icon>
+          Νέα Συνομιλία
+        </button>
+        <button mat-stroked-button (click)="goToProducts()">
+          <mat-icon>list</mat-icon>
+          Προϊόντα
+        </button>
+      </div>
+
+      <!-- Conversations List -->
+      <div *ngIf="filteredConversations.length > 0; else noConversations">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let conversation of filteredConversations" 
+                              (click)="viewConversation(conversation)"
+                              class="conversation-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>chat</mat-icon>
+                <span class="conversation-title">{{ conversation.title }}</span>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span class="conversation-date">{{ conversation.updatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                <button mat-icon-button 
+                        (click)="deleteConversation(conversation, $event)"
+                        class="delete-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Preview of first few messages -->
+            <div class="conversation-preview">
+              <div *ngFor="let message of conversation.messages.slice(0, 3)" class="preview-message">
+                <strong>{{ message.sender === 'user' ? 'Εσείς' : 'Βοηθός' }}:</strong>
+                <span>{{ message.text.length > 100 ? (message.text.substring(0, 100) + '...') : message.text }}</span>
+              </div>
+              <div *ngIf="conversation.messages.length > 3" class="more-messages">
+                ... και {{ conversation.messages.length - 3 }} ακόμα μηνύματα
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <!-- No Conversations Message -->
+      <ng-template #noConversations>
+        <div class="no-conversations text-center">
+          <mat-icon style="font-size: 48px; color: #ccc;">chat_bubble_outline</mat-icon>
+          <p *ngIf="searchQuery">Δεν βρέθηκαν συνομιλίες που να ταιριάζουν με την αναζήτησή σας.</p>
+          <p *ngIf="!searchQuery">Δεν υπάρχουν αποθηκευμένες συνομιλίες ακόμα.</p>
+          <button mat-raised-button color="primary" (click)="startNewChat()">
+            Ξεκινήστε τη πρώτη σας συνομιλία
+          </button>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
