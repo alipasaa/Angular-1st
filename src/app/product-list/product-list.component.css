@@ -1,3 +1,24 @@
+.navigation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-title {
+  margin: 0;
+  color: #1976d2;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+}
+
 .custom-title {
   color: rgb(51, 120, 185);  
   font-size: 22px;         /* Increase the font size */

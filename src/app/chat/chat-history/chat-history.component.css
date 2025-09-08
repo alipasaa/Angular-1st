@@ -1,0 +1,76 @@
+.search-container {
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.conversation-panel {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.conversation-panel:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.conversation-title {
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.conversation-date {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.delete-btn {
+  color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.conversation-preview {
+  padding: 10px 0;
+}
+
+.preview-message {
+  margin-bottom: 8px;
+  padding: 4px 0;
+  border-left: 3px solid #e0e0e0;
+  padding-left: 10px;
+}
+
+.preview-message strong {
+  color: #1976d2;
+}
+
+.more-messages {
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.no-conversations {
+  padding: 40px 20px;
+}
+
+.no-conversations mat-icon {
+  display: block;
+  margin: 0 auto 20px;
+}
+
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons button {
+    width: 100%;
+  }
+}

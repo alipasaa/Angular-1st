@@ -1,4 +1,19 @@
 <div class="container mt-4">
+  <!-- Navigation Header -->
+  <div class="navigation-header mb-3">
+    <h1 class="page-title">Εφαρμογή Προϊόντων</h1>
+    <div class="nav-actions">
+      <button mat-raised-button color="accent" (click)="goToChatHistory()" class="me-2">
+        <mat-icon>history</mat-icon>
+        Ιστορικό Συνομιλιών
+      </button>
+      <button mat-stroked-button (click)="startNewChat()">
+        <mat-icon>chat</mat-icon>
+        Νέα Συνομιλία
+      </button>
+    </div>
+  </div>
+
   <mat-card>
     <h2 class="custom-title">Please select fields</h2> <!-- Updated title with custom class -->
     <div class="row g-3 align-items-center">
